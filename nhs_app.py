@@ -1,11 +1,11 @@
 '''
 import pandas as pd
-NHS_DATA = pd.read_csv('NHS_DATA.csv')
-print(NHS_DATA.shape())
-print(NHS_DATA.info())
+df = pd.read_csv('df.csv')
+print(df.shape())
+print(df.info())
 
-X = NHS_DATA.iloc[:,:-1].values # feature matrix
-y = NHS_DATA.iloc[:,1].values # response vector
+X = df.iloc[:,:-1].values # feature matrix
+y = df.iloc[:,1].values # response vector
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=1)
@@ -54,16 +54,16 @@ from sklearn.metrics import r2_score
 # from sklearn.metrics import mean_absolute_error,mean_squared_error, r2_score
 
 # LOADING DATASET
-NHS_DATA = pd.read_csv('NHS_LIST.csv')
-NHS_DATA.head()
-NHS_DATA.info()
-NHS_DATA.describe()
+df = pd.read_csv('NHS_LIST.csv')
+df.head()
+df.info()
+df.describe()
 
 # CREATING FEATURE MATRIX AND RESPONSE VECTOR
-Date = NHS_DATA.iloc[:,:-1].values # feature matrix
-Date = pd.to_datetime(NHS_DATA['Week Ending'])
-Waiting_Time = NHS_DATA.iloc[:,1].values # response vector
-Waiting_Time = pd.to_numeric(NHS_DATA['Total Waiting List'], errors='coerce')  # Convert Waiting Time to numeric
+Date = df.iloc[:,:-1].values # feature matrix
+Date = pd.to_datetime(df['Week Ending'])
+Waiting_Time = df.iloc[:,1].values # response vector
+Waiting_Time = pd.to_numeric(df['Total Waiting List'], errors='coerce')  # Convert Waiting Time to numeric
 # SPLITTING THE DATA
 Date_train, Date_test, Waiting_Time_train, Waiting_Time_test = train_test_split(Date, Waiting_Time, test_size=0.30, random_state=1)
 
@@ -91,7 +91,7 @@ print('Model Score: ', r2)
 
 # FITTING LINEAR REGRESSION LINE
 '''
-sns.regplot(x='Date', y='Waiting Time', data=NHS_DATA, ci=None, 
+sns.regplot(x='Date', y='Waiting Time', data=df, ci=None, 
             scatter_kws={'s':100, 'facecolor':'red'})
 '''
 
