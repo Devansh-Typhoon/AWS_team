@@ -1,9 +1,12 @@
 
 from flask import Flask, request, render_template, jsonify
 import pandas as pd
-import matplotlib as mpl
+import matplotlib.pyplot as plt
+import matplotlib.dates as dates
 from sklearn.linear_model import LinearRegression
 import os
+from sklearn.metrics import mean_squared_error, r2_score
+import openpyxl
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -28,25 +31,34 @@ def linear_regression():
     if file.filename == '':
         return jsonify('error', 'No file selected for uploading')
     try:
-        df = pd.read_excel(file)
+        df = pd.read_excel(file, usecols="B,E")
+        complete_data = df.iloc[15:]
 
+        print(complete_data)
+        x = df.iloc[2:3, 15:]
+        y = df.iloc[5:6, 15:]
+        plt.scatter(x, y)
+        plt.title("NHS Records Data")
+        plt.xlabel("Date")
+        plt.ylabel("Number Of Waitlist Patients")
+        plt.show()
 
-
-
-    if df.empty:
-        return jsonify('error', 'The uploaded file is empty')
+        if df.empty:
+            return jsonify('error', 'The uploaded file is empty')
 #chosen axes names are weeks and total waiting list
-    if 'weeks' not in df.columns or 'total_waiting_list' not in df.columns:
-        return jsonify('error', 'Wrong column headings given')
+        if 'weeks' not in df.columns or 'total_waiting_list' not in df.columns:
+            return jsonify('error', 'Wrong column headings given')
+#
+#     weeks = df[['weeks']].values.reshape(-1,1)
+#     total_waiting_list = df[['total_waiting_list']].values
+#
+#     model = LinearRegression().fit(weeks,total_waiting_list)
+#     weeks_new =
 
-    weeks = df[['weeks']].values.reshape(-1,1)
-    total_waiting_list = df[['total_waiting_list']].values
-
-    model = LinearRegression().fit(weeks,total_waiting_list)
-    weeks_new = 
 
 
-
+    except Exception as E:
+        return jsonify({'error': str(E)}), 500
 
 
 
