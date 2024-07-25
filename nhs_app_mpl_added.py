@@ -35,8 +35,8 @@ def linear_regression():
         complete_data = df.iloc[15:]
 
         print(complete_data)
-        x = df.iloc[2:3, 15:]
-        y = df.iloc[5:6, 15:]
+        x = data.iloc[15:, 2:3]
+        y = data.iloc[15:, 5:6]
         plt.scatter(x, y)
         plt.title("NHS Records Data")
         plt.xlabel("Date")
