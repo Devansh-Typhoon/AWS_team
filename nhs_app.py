@@ -90,7 +90,11 @@ r2 = r2_score(Waiting_Time_test,y_pred)
 print('Model Score: ', r2)
 
 # FITTING LINEAR REGRESSION LINE
+'''
 sns.regplot(x='Date', y='Waiting Time', data=NHS_DATA, ci=None, 
             scatter_kws={'s':100, 'facecolor':'red'})
+'''
 
-
+import matplotlib.pyplot as plt
+plt.scatter(Waiting_Time_test, y_pred, alpha=0.5)
+plt.plot([Waiting_Time.min(), Waiting_Time.max()], [Waiting_Time.min(), Waiting_Time.max()], color='red')
