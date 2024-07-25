@@ -54,22 +54,22 @@ from sklearn.metrics import r2_score
 # from sklearn.metrics import mean_absolute_error,mean_squared_error, r2_score
 
 # LOADING DATASET
-NHS_DATA = pd.read_csv('NHS_DATA.csv')
+NHS_DATA = pd.read_csv('NHS_LIST.csv')
 NHS_DATA.head()
 NHS_DATA.info()
 NHS_DATA.describe()
 
 # CREATING FEATURE MATRIX AND RESPONSE VECTOR
 Date = NHS_DATA.iloc[:,:-1].values # feature matrix
+Date = pd.to_datetime(NHS_DATA['Week Ending'])
 Waiting_Time = NHS_DATA.iloc[:,1].values # response vector
-
+Waiting_Time = pd.to_numeric(NHS_DATA['Total Waiting List'], errors='coerce')  # Convert Waiting Time to numeric
 # SPLITTING THE DATA
 Date_train, Date_test, Waiting_Time_train, Waiting_Time_test = train_test_split(Date, Waiting_Time, test_size=0.30, random_state=1)
 
 # FITTING LINEAR REGRESSION MODEL / TRAINING
 regressor = LinearRegression()
 regressor.fit(Date_train, Waiting_Time_train)
-
 # GETTING THE COEFFICIENTS AND INTERCEPT
 print('Coefficients: ', regressor.coef_)
 print('Intercept: ',regressor.intercept_)
@@ -98,3 +98,7 @@ sns.regplot(x='Date', y='Waiting Time', data=NHS_DATA, ci=None,
 import matplotlib.pyplot as plt
 plt.scatter(Waiting_Time_test, y_pred, alpha=0.5)
 plt.plot([Waiting_Time.min(), Waiting_Time.max()], [Waiting_Time.min(), Waiting_Time.max()], color='red')
+plt.xlabel('Actual Values')
+plt.ylabel('Predicted Values')
+plt.title('Predicted vs Actual Regression')
+plt.show()
