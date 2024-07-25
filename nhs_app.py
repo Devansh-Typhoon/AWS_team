@@ -65,7 +65,8 @@ Date = pd.to_datetime(df['Week Ending'])
 Waiting_Time = df.iloc[:,1].values # response vector
 Waiting_Time = pd.to_numeric(df['Total Waiting List'], errors='coerce')  # Convert Waiting Time to numeric
 # SPLITTING THE DATA
-Date_train, Date_test, Waiting_Time_train, Waiting_Time_test = train_test_split(Date, Waiting_Time, test_size=0.30, random_state=1)
+
+Date_train, Date_test, Waiting_Time_train, Waiting_Time_test = train_test_split(Date.values.reshape(-1, 1), Waiting_Time, test_size=0.30, random_state=1)
 
 # FITTING LINEAR REGRESSION MODEL / TRAINING
 regressor = LinearRegression()
