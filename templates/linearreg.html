@@ -1,14 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>linear reg</title>
+    <meta charset="UTF-8">
+    <title>Linear Regression Plot</title>
 </head>
 <body>
-  <h1>Upload Excel File</h1>
-  <form action="/" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" accept=".xlsx">
-    <input type="submit" value="Upload">
-  </form>
+    <h1>Linear Regression Result</h1>
+    <img src="{{ url_for('static', filename=plot_filename) }}" alt="Plot image">
 </body>
 </html>
