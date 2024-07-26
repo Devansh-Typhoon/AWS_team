@@ -39,7 +39,8 @@ def linear_regression():
     print("I am here")
     try:
         # df = pd.read_csv(data_file)
-        df = pd.read_excel(data_file,skiprows=13)
+        df = pd.read_excel(data_file,skiprows=14,header=None)
+        df.columns=["test","Week Ending",	"Number of acute providers submitting",	"Total number of providers submitting",	"Total Waiting List",	"Up to 18 weeks",	"Over 18 and up to 26 weeks",	"Over 26 and up to 40 weeks",	"Over 40 and up to 52 weeks",	"Over 52 and up to 65 weeks",	"Over 65 and up to 78 weeks",	"Over 78 and up to 104 weeks",	"Over 104 weeks",	"Unknown Clock Start Date",	"Number of acute providers submitting",	"Total number of providers submitting",	"Total",	"Number of acute providers submitting",	"Total number of providers submitting",	"Total",	"Admitted - RTT",	"Non-Admitted - RTT"]
         df.head()
         df.info()
         df.describe()
