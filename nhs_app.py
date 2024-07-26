@@ -14,6 +14,7 @@ import base64
 import io
 import matplotlib.pyplot as plt
 import seaborn as sns
+import aws_library as aws
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -139,3 +140,8 @@ if __name__ == '__main__':
     # if not os.path.exists(app.config['UPLOAD_FOLDER']):
     #     os.makedirs(app.config['UPLOAD_FOLDER'])
     app.run(debug=True)
+
+base_url = "http://127.0.0.1:5000/"
+input_date = "2022-07-25"
+result = aws.get_predicted_waiting_list(base_url, input_date)
+print(result)
